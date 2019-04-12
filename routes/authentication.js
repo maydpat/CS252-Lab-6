@@ -12,7 +12,7 @@ const mysql = require('mysql');
 const nodemailer = require('nodemailer');
 const { check } = require('express-validator/check')
 let dbInfo = {
-  host: "104.248.183.251",
+  host: "localhost",
   user: "root",
   password: "Okaydone1234!",
   database : 'workout'
