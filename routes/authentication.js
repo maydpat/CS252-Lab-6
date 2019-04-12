@@ -18,6 +18,7 @@ let dbInfo = {
   database : 'workout'
 };
 
+// Comment
 const LocalStrategy = require('passport-local').Strategy;
 const AuthenticationFunctions = require('../helper/Authentication');
 
