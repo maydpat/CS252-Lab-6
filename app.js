@@ -26,9 +26,11 @@ app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, 'views'));
 
 const authentication = require('./routes/authentication');
+const platform = require('./routes/platform');
 
 // Static folder
 app.use(express.static(path.join(__dirname, '/public')));
+app.use("/platform", express.static(path.join(__dirname, '/public')));
 app.use(cookieParser());
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -47,9 +49,8 @@ app.use(passport.session());
 
 // Use routes
 app.use('/', authentication);
+app.use('/platform', platform);
 
-// Static folder
-app.use(express.static(path.join(__dirname, '/public')));
 
 app.listen(port, () =>{
   console.log(`Server started on port ${port}`);
