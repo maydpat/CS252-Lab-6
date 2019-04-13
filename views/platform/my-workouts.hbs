@@ -1,0 +1,73 @@
+{{> header}}
+
+
+
+<div class="wrapper">
+            <div class="container-fluid">
+
+                <!-- Page-Title -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="page-title-box">
+                            <div class="btn-group pull-right">
+                                <ol class="breadcrumb hide-phone p-0 m-0">
+                                    <li class="breadcrumb-item"><a href="#">Workout App</a></li>
+                                    <li class="breadcrumb-item active">My Workouts</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">My Workouts</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title end breadcrumb -->
+                {{#if error}}
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    {{error}}
+                </div>
+                {{/if}}
+                {{#if success}}
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    {{success}}
+                </div>
+                {{/if}}
+
+               <div class="row">
+                    <div class="col-12">
+                        <div class="card-box table-responsive">
+                            <h4 class="m-t-0 header-title">My Workouts</h4>
+
+                            <table id="datatable" class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Calories</th>
+                                    <th>Hours</th>
+                                    <th>Date</th>
+                                </tr>
+                                </thead>
+
+
+                                <tbody>
+                                {{#each workouts}}
+                                <tr>
+                                    <td>{{description}}</td>
+                                    <td>{{calories}}</td>
+                                    <td>{{hours}}</td>
+                                    <td>{{date}}</td>
+                                </tr>
+                                {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div> <!-- end row -->
+
+
+            </div> <!-- end container -->
+        </div>
+        <!-- end wrapper -->
+        
+        
+        {{> footer}}

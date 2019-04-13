@@ -1,0 +1,75 @@
+{{> header}}
+
+
+
+<div class="wrapper">
+            <div class="container-fluid">
+
+                <!-- Page-Title -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="page-title-box">
+                            <div class="btn-group pull-right">
+                                <ol class="breadcrumb hide-phone p-0 m-0">
+                                    <li class="breadcrumb-item"><a href="#">Workout App</a></li>
+                                    <li class="breadcrumb-item active">Workout App Proifles</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">My Workouts</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title end breadcrumb -->
+                {{#if error}}
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    {{error}}
+                </div>
+                {{/if}}
+                {{#if success}}
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    {{success}}
+                </div>
+                {{/if}}
+
+               <div class="row">
+                    <div class="col-12">
+                        <div class="card-box table-responsive">
+                            <h4 class="m-t-0 header-title">Workout App Profiles</h4>
+
+                            <table id="datatable" class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Calories this week</th>
+                                    <th>Hours this week</th>
+                                    <th>Weekly Calorie Goal</th>
+                                    <th>Weekly Hour Goal</th>
+                                </tr>
+                                </thead>
+
+
+                                <tbody>
+                                {{#each workouts}}
+                                <tr>
+                                    <td>{{first_name}}</td>
+                                    <td>{{current_weekly_calories}}</td>
+                                    <td>{{current_weekly_hours}}</td>
+                                    <td>{{weekly_calorie_goal}}</td>
+                                    <td>{{weekly_exercise_goal}}</td>
+                                </tr>
+                                {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div> <!-- end row -->
+
+
+            </div> <!-- end container -->
+        </div>
+        <!-- end wrapper -->
+        
+        
+        {{> footer}}
