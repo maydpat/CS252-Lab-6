@@ -51,11 +51,17 @@ router.post(`/dashboard/enter-workout`, AuthenticationFunctions.ensureAuthentica
       con.end();
       return res.send();
     }
-    con.end();
-    req.flash('success', 'Successfully entered workout.');
-    return res.redirect('/platform/dashboard');
+    con.query(`UPDATE users SET current_weekly_calories=current_weekly_calories+${mysql.escape(req.body.caloriesBurned)}, current_weekly_hours=current_weekly_hours+${mysql.escape(req.body.hoursSpent)} WHERE id=${mysql.escape(req.user.identifier)};`, (error, updateUserResult, fields) => {
+      if (error) {
+        con.end();
+        console.log(error.stack);
+        return res.send();
+      }
+      con.end();
+      req.flash('success', 'Successfully entered workout.');
+      return res.redirect('/platform/dashboard');
+    });
   });
-  
 });
 
 router.get('/profile', AuthenticationFunctions.ensureAuthenticated, (req, res) => {
@@ -170,6 +176,46 @@ router.post('/profile/change-goals', AuthenticationFunctions.ensureAuthenticated
     req.flash('success', 'Successfully updated Workout App goals.');
     con.end();
     return res.redirect('/platform/profile');
+  });
+});
+
+router.get('/my-workouts', AuthenticationFunctions.ensureAuthenticated, (req, res) => {
+  let con = mysql.createConnection(dbInfo);
+  con.query(`SELECT * FROM workouts WHERE user=${mysql.escape(req.user.identifier)};`, (error, userWorkouts, fields) => {
+    if (error) {
+      console.log(error.stack);
+      con.end();
+      return res.send();
+    }
+    con.end();
+    return res.render('platform/my-workouts.hbs', {
+      error: req.flash('error'),
+      success: req.flash('success'),
+      username: req.user.username,
+      firstName: req.user.firstName,
+      lastName: req.user.lastName,
+      workouts: userWorkouts,
+    });
+  });
+});
+
+router.get('/workout-app-profiles', AuthenticationFunctions.ensureAuthenticated, (req, res) => {
+  let con = mysql.createConnection(dbInfo);
+  con.query(`SELECT * FROM users;`, (error, userWorkouts, fields) => {
+    if (error) {
+      console.log(error.stack);
+      con.end();
+      return res.send();
+    }
+    con.end();
+    return res.render('platform/workout-app-profiles.hbs', {
+      error: req.flash('error'),
+      success: req.flash('success'),
+      username: req.user.username,
+      firstName: req.user.firstName,
+      lastName: req.user.lastName,
+      workouts: userWorkouts,
+    });
   });
 });
 

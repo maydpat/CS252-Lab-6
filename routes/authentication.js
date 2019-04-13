@@ -9,7 +9,6 @@ const passport = require("passport");
 const flash = require('connect-flash');
 var request = require("request");
 const mysql = require('mysql');
-const nodemailer = require('nodemailer');
 const { check } = require('express-validator/check')
 let dbInfo = {
   host: "localhost",
