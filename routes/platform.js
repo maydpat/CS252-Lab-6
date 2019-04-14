@@ -40,6 +40,7 @@ router.get('/dashboard', AuthenticationFunctions.ensureAuthenticated, (req, res)
     let hourPercent = Math.floor((Number(users[0].current_weekly_hours) / Number(users[0].weekly_exercise_goal)) * 100);
     if (hourPercent > 100) hourPercent = 100;
     if (caloriePercent > 100) caloriePercent = 100;
+    con.end();
     return res.render('platform/dashboard.hbs', {
       user: req.user,
       error: req.flash('error'),
@@ -113,6 +114,7 @@ router.get('/profile', AuthenticationFunctions.ensureAuthenticated, (req, res) =
       return res.send();
     }
     if (users.length === 1) {
+      con.end();
       return res.render('platform/profile.hbs', {
         user: req.user,
         username: users[0].username,

@@ -48,6 +48,7 @@ function getData(dates, userID, graph) {
           }
         }
       }
+      con.end();
       resolve(graph);
     })
   })

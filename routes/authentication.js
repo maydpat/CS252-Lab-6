@@ -130,7 +130,7 @@ passport.use(new LocalStrategy({passReqToCallback: true,},
             con.end();
             return done(null, userObject);
           } else {
-            cone.end();
+            con.end();
             return done(null, false, req.flash('error', 'Username or Password is incorrect.'));
           }
         }
