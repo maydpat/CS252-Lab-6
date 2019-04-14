@@ -29,10 +29,26 @@ router.get('/', AuthenticationFunctions.ensureAuthenticated, (req, res) => {
 });
 
 router.get('/dashboard', AuthenticationFunctions.ensureAuthenticated, (req, res) => {
-  return res.render('platform/dashboard.hbs', {
-    user: req.user,
-    error: req.flash('error'),
-    success: req.flash('success'),
+  let con = mysql.createConnection(dbInfo);
+  con.query(`SELECT * FROM users WHERE id=${mysql.escape(req.user.identifier)};`, (error, users, fields) => {
+    if (error) {
+      con.end();
+      console.log(error.stack);
+      return res.send();
+    }
+    let caloriePercent = Math.floor((Number(users[0].current_weekly_calories) / Number(users[0].weekly_calorie_goal)) * 100);
+    let hourPercent = Math.floor((Number(users[0].current_weekly_hours) / Number(users[0].weekly_exercise_goal)) * 100);
+    if (hourPercent > 100) hourPercent = 100;
+    if (caloriePercent > 100) caloriePercent = 100;
+    return res.render('platform/dashboard.hbs', {
+      user: req.user,
+      error: req.flash('error'),
+      success: req.flash('success'),
+      calories: users[0].current_weekly_calories,
+      hours: users[0].current_weekly_hours,
+      caloriePercent: caloriePercent,
+      hourPercent: hourPercent,
+    });
   });
 });
 
