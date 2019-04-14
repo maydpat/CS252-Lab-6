@@ -22,6 +22,7 @@ let dbInfo = {
 };
 const LocalStrategy = require('passport-local').Strategy;
 const AuthenticationFunctions = require('../helper/Authentication');
+const CalorieHourChartFunctions = require('../helper/Calorie-Hour-Chart');
 
 router.get('/', AuthenticationFunctions.ensureAuthenticated, (req, res) => {
   return res.redirect('/platform/dashboard');
@@ -62,6 +63,29 @@ router.post(`/dashboard/enter-workout`, AuthenticationFunctions.ensureAuthentica
       return res.redirect('/platform/dashboard');
     });
   });
+});
+
+router.get('/dashboard/build-graph', AuthenticationFunctions.ensureAuthenticated, (req, res) => {
+  function formatDate(date){
+
+      var dd = date.getDate();
+      var mm = date.getMonth()+1;
+      var yyyy = date.getFullYear();
+      if(dd<10) {dd='0'+dd}
+      if(mm<10) {mm='0'+mm}
+      date = yyyy+'-'+mm+'-'+dd;
+      return date
+   }
+  let dates = [];
+  for (let i=7; i>=0; i--) {
+      let d = new Date();
+      d.setDate(d.getDate() - i);
+      dates.push(formatDate(d));
+  }
+  CalorieHourChartFunctions.buildGraph(dates, req.user.identifier)
+  .then(results => {
+    return res.send(results);
+  })
 });
 
 router.get('/profile', AuthenticationFunctions.ensureAuthenticated, (req, res) => {

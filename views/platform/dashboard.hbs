@@ -1,7 +1,6 @@
 {{> header}}
 
 
-
 <div class="wrapper">
             <div class="container-fluid">
 
@@ -71,86 +70,48 @@
                 <!-- end row -->
 
 
-
-                <!-- Begin row for chart displaying calories burn per day (display one week) -->
                 <div class="row">
-                    <div class="col-lg-4">
-                        <div class="card-box">
-                            <h4 class="header-title m-t-0 m-b-30">Total Revenue</h4>
 
-                            <div class="widget-chart text-center">
-                                <div id="sparkline1"></div>
-                                <ul class="list-inline m-t-15 mb-0">
-                                    <li>
-                                        <h5 class="text-muted m-t-20">Target</h5>
-                                        <h4 class="m-b-0">$56,214</h4>
-                                    </li>
-                                    <li>
-                                        <h5 class="text-muted m-t-20">Last week</h5>
-                                        <h4 class="m-b-0">$98,251</h4>
-                                    </li>
-                                    <li>
-                                        <h5 class="text-muted m-t-20">Last Month</h5>
-                                        <h4 class="m-b-0">$10,025</h4>
-                                    </li>
-                                </ul>
+                    <!-- Area Chart -->
+                    <div class="col-lg-12">
+                        <div class="portlet">
+                            <!-- /primary heading -->
+                            <div class="portlet-heading">
+                                <h3 class="portlet-title text-dark"> Area Chart of total calories and exercise hours for the past week </h3>
+                                <div class="portlet-widgets">
+                                    <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
+                                    <span class="divider"></span>
+                                    <a data-toggle="collapse" data-parent="#accordion1" href="#portlet2"><i class="ion-minus-round"></i></a>
+                                    <span class="divider"></span>
+                                    <a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div id="portlet2" class="panel-collapse collapse show">
+                                <div class="portlet-body">
+                                    <div class="text-center">
+                                        <ul class="list-inline chart-detail-list">
+                                            <li class="list-inline-item">
+                                                <h5><i class="fa fa-circle m-r-5" style="color: #3bafda;"></i>Calories</h5>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <h5><i class="fa fa-circle m-r-5" style="color: #80deea;"></i>Hours</h5>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div id="morris-area-with-dotted" style="height: 300px;"></div>
+                                </div>
                             </div>
                         </div>
-
-                    </div>
-
-                    <div class="col-lg-4">
-                        <div class="card-box">
-                            <h4 class="header-title m-t-0 m-b-30">Yearly Sales Report</h4>
-
-                            <div class="widget-chart text-center">
-                                <div id="sparkline2"></div>
-                                <ul class="list-inline m-t-15 mb-0">
-                                    <li>
-                                        <h5 class="text-muted m-t-20">Target</h5>
-                                        <h4 class="m-b-0">$1000</h4>
-                                    </li>
-                                    <li>
-                                        <h5 class="text-muted m-t-20">Last week</h5>
-                                        <h4 class="m-b-0">$523</h4>
-                                    </li>
-                                    <li>
-                                        <h5 class="text-muted m-t-20">Last Month</h5>
-                                        <h4 class="m-b-0">$965</h4>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-4">
-                        <div class="card-box">
-                            <h4 class="header-title m-t-0 m-b-30">Weekly Sales Report</h4>
-
-                            <div class="widget-chart text-center">
-                                <div id="sparkline3"></div>
-                                <ul class="list-inline m-t-15 mb-0">
-                                    <li>
-                                        <h5 class="text-muted m-t-20">Target</h5>
-                                        <h4 class="m-b-0">$1,84,125</h4>
-                                    </li>
-                                    <li>
-                                        <h5 class="text-muted m-t-20">Last week</h5>
-                                        <h4 class="m-b-0">$50,230</h4>
-                                    </li>
-                                    <li>
-                                        <h5 class="text-muted m-t-20">Last Month</h5>
-                                        <h4 class="m-b-0">$87,451</h4>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
+                        <!-- /Portlet -->
                     </div>
 
                 </div>
-                <!-- End row for chart displaying calories burn per day (display one week) -->
+                <!-- End row-->
+
+
+
+
                 
                 <div class="row">
                    <div class="col-lg-12">
@@ -180,6 +141,7 @@
             </div> <!-- end container -->
         </div>
         <!-- end wrapper -->
+        
         
         
         {{> footer}}
