@@ -19,39 +19,21 @@ let dbInfo = {
   database : 'workout'
 };
 
-cron.schedule("*/5 * * * * *", function() {
+// Cron to reset weekly calorie/hour counts for every user on Workout App (Every Sunday)
+cron.schedule("0 0 * * SUN", function() {
   weeklyWorkoutsReset();
 });
 
-
 function weeklyWorkoutsReset() {
   let con = mysql.createConnection(dbInfo);
-  con.query(`SELECT * FROM users;`, (error, users, fields) => {
+  con.query(`UPDATE users SET current_weekly_calories=0, current_weekly_hours=0;`, (error, updateUsersResult, fields) => {
     if (error) {
       console.log(error.stack);
       con.end();
       return;
     }
-    for (let i = 0; i < users.length; i++) {
-      let currentDate = new Date();
-      currentDate = currentDate.getTime();
-      let weeklyTime = new Date(users[i].week_timer);
-      weeklyTime = weeklyTime.getTime();
-      let week = 1000 * 60 * 60 * 24 * 7;
-      if ((currentDate - weeklyTime) >= week) {
-        let timestamp = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
-        con.query(`UPDATE users SET current_weekly_calories=0, current_weekly_hours=0, week_timer=${mysql.escape(timestamp)} WHERE id=${mysql.escape(users[i].id)};`, (error, updateUserResult, fields) => {
-          if (error) {
-            console.log(error.stack);
-            con.end();
-            return;
-          }
-        });
-      } else {
-        continue;
-      }
-    }
     con.end();
+    return;
   });
 }
 
